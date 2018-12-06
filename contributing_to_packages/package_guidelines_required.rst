@@ -208,12 +208,12 @@ So, don't do this:
 
     def build(self):
         cmake = CMake(self)
-		cmake.configure()
-		cmake.build()
-		cmake.install()
+        cmake.configure()
+	cmake.build()
+	cmake.install()
 		
-	def package(self):
-		pass
+    def package(self):
+	pass
 
 Do this instead: 
 
@@ -221,33 +221,33 @@ Do this instead:
 
     def build(self):
         cmake = CMake(self)
-		cmake.configure()
-		cmake.build()
+	cmake.configure()
+	cmake.build()
 
     def package(self):
         cmake = CMake(self)
-		cmake.configure()
-		cmake.install()
+	cmake.configure()
+	cmake.install()
 		
 Or, you can do this, particularly if there are any special definitions: 
 
 .. code:: python
 
-	def _configure_cmake(self):
+    def _configure_cmake(self):
         cmake = CMake(self)
         cmake.definitions["BUILD_TESTS"] = False # example
         cmake.definitions['LOG4CPLUS_SINGLE_THREADED'] = self.options.single_threaded
         cmake.definitions['LOG4CPLUS_BUILD_LOGGINGSERVER'] = self.options.build_loggingserver
-		cmake.configure()
-		return cmake
+	cmake.configure()
+	return cmake
 		
     def build(self):
         cmake = self._configure_cmake()
-		cmake.build()
+	cmake.build()
 
     def package(self):
         cmake = self._configure_cmake()
-		cmake.install()
+	cmake.install()
 		
 		
 package() method
